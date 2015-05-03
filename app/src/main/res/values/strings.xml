@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">YoutubeApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="likes">喜歡</string>
+    <string name="time">長度</string>
+    <string name="views">觀看次數</string>
+    <string name="launch_time">發佈時間</string>
+</resources>

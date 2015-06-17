@@ -1,27 +1,17 @@
-package com.jasonko.newyoutubeapp;
+package com.jasonko.videolib;
 
-import android.app.Activity;
-import android.os.AsyncTask;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 
-public class MainActivity extends Activity {
-
-    ArrayList<YoutubeVideo> myVideos = new ArrayList<YoutubeVideo>();
-    ListView myListView;
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myListView = (ListView) findViewById(R.id.listView);
-
-        new DownloadVideosTask().execute();
     }
 
     @Override
@@ -45,21 +35,4 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    private class DownloadVideosTask extends AsyncTask {
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            myVideos = VideoAPI.getYoutubeVideos("animation");
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            ListVideoAdapter videoAdapter = new ListVideoAdapter(MainActivity.this,myVideos);
-            myListView.setAdapter(videoAdapter);
-        }
-    }
-
-
 }

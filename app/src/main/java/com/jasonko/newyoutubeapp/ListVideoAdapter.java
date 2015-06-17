@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.jasonko.imageloader.ImageLoader;
 
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -69,33 +69,21 @@ public class ListVideoAdapter extends BaseAdapter {
         textLikes.setText(data.get(position).getLikes()+" "+mActivity.getResources().getString(R.string.likes));
 
         // set date text
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-        final String dateString = formatter.format(data.get(position).getUploadDate());
-        textDate.setText(mActivity.getResources().getString(R.string.launch_time)+": "+dateString);
+        textDate.setText("發佈時間："+data.get(position).getUploadDate());
 
         // set duration text
-        int[] intTime = splitToComponentTimes(data.get(position).getDuration());
-        if(intTime[0]!=0){
-            textDuration.setText(mActivity.getResources().getString(R.string.time)+":"+Integer.toString(intTime[0])+":"+Integer.toString(intTime[1])+":"+Integer.toString(intTime[2]));
-        }else{
-            String timeSecond = "";
-            if(intTime[2]<10){
-                timeSecond = "0"+Integer.toString(intTime[2]);
-            }else{
-                timeSecond = Integer.toString(intTime[2]);
-            }
-            textDuration.setText(mActivity.getResources().getString(R.string.time)+":"+Integer.toString(intTime[1])+":"+timeSecond);
-        }
+        textDuration.setText(mActivity.getResources().getString(R.string.time)+":"+data.get(position).getDuration());
 
         // set image
-        imageLoader.DisplayImage(data.get(position).getThumbnail(), image);
+        imageLoader.DisplayImage(data.get(position).getThumbnail_small(), image);
 
         vi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent newIntent = new Intent(mActivity, VideoActivity.class);
-                String videoId = getVideoID(data.get(position).getLink());
-                newIntent.putExtra("VideoId", videoId);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("video", data.get(position));
+                newIntent.putExtras(bundle);
                 mActivity.startActivity(newIntent);
             }
         });
@@ -103,18 +91,6 @@ public class ListVideoAdapter extends BaseAdapter {
         return vi;
     }
 
-    public static int[] splitToComponentTimes(int i)
-    {
-        long longVal = (long)i;
-        int hours = (int) longVal / 3600;
-        int remainder = (int) longVal - hours * 3600;
-        int mins = remainder / 60;
-        remainder = remainder - mins * 60;
-        int secs = remainder;
-
-        int[] ints = {hours , mins , secs};
-        return ints;
-    }
 
     private String getVideoID (String videoUrl) {
         String id = "";

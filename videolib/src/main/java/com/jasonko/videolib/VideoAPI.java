@@ -1,4 +1,4 @@
-package com.jasonko.newyoutubeapp;
+package com.jasonko.videolib;
 
 import android.util.Log;
 

@@ -5,23 +5,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
-import java.util.ArrayList;
+/**
+ * Created by kolichung on 5/4/15.
+ */
+public class VideoActivtiyTwo extends Activity {
 
-
-public class MainActivity extends Activity {
-
-    ArrayList<YoutubeVideo> myVideos = new ArrayList<YoutubeVideo>();
-    ListView myListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        myListView = (ListView) findViewById(R.id.listView);
-
-        new DownloadVideosTask().execute();
+        setContentView(R.layout.layout_video);
     }
 
     @Override
@@ -50,14 +44,13 @@ public class MainActivity extends Activity {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            myVideos = VideoAPI.getYoutubeVideos("animation");
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Object result) {
-            ListVideoAdapter videoAdapter = new ListVideoAdapter(MainActivity.this,myVideos);
-            myListView.setAdapter(videoAdapter);
+
         }
     }
 

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YoutubePlay_part2_new.iml" filepath="$PROJECT_DIR$/YoutubePlay_part2_new.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/videolib/videolib.iml" filepath="$PROJECT_DIR$/videolib/videolib.iml" />
     </modules>
   </component>
 </project>

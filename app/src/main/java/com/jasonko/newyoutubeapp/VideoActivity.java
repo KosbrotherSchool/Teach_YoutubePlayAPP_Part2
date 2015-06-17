@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +22,7 @@ import com.jasonko.imageloader.ImageLoader;
 
 public class VideoActivity extends Activity {
 
-    YoutubeVideo mYoutubeVideo;
-    String videoId;
+    Video mYoutubeVideo;
 
     ImageView yImage;
     TextView yTitle;
@@ -33,12 +33,11 @@ public class VideoActivity extends Activity {
 
     ImageLoader mImageLoader;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_video);
-        videoId = getIntent().getStringExtra("VideoId");
+        mYoutubeVideo = (Video) getIntent().getSerializableExtra("video");
 
         yImage = (ImageView) findViewById(R.id.youtube_imageview);
         yTitle = (TextView) findViewById(R.id.youtube_text_title);
@@ -47,6 +46,7 @@ public class VideoActivity extends Activity {
         btnToYoutube = (Button) findViewById(R.id.button_youtube);
 
         mImageLoader = new ImageLoader(this);
+
         new DownloadVideoTask().execute();
 
         btnShare.setOnClickListener(new View.OnClickListener() {
@@ -97,16 +97,16 @@ public class VideoActivity extends Activity {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            mYoutubeVideo = VideoAPI.getYoutubeVideoByID(videoId);
+//            mYoutubeVideo = VideoAPI.getYoutubeVideoByID(videoId);
             return null;
         }
 
         @Override
         protected void onPostExecute(Object result) {
 
-            mImageLoader.DisplayImage(mYoutubeVideo.getThumbnail(),yImage);
+            mImageLoader.DisplayImage(mYoutubeVideo.getThumbnail_large(), yImage);
             yTitle.setText(mYoutubeVideo.getTitle());
-            yDesc.setText(mYoutubeVideo.getDescription());
+            yDesc.setText(Html.fromHtml(mYoutubeVideo.getDescription()));
 
         }
     }

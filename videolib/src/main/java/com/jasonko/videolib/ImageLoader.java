@@ -46,7 +46,7 @@ public class ImageLoader
 		REQUIRED_SIZE = size;
 	}
 
-	final int stub_id = R.mipmap.ic_launcher;
+//	final int stub_id = R.mipmap.ic_launcher;
 
 	public void DisplayImage(String url, ImageView imageView)
 	{
@@ -58,7 +58,7 @@ public class ImageLoader
 		else
 		{
 			queuePhoto(url, imageView);
-			imageView.setImageResource(stub_id);
+//			imageView.setImageResource(stub_id);
 		}
 	}
 
@@ -86,7 +86,7 @@ public class ImageLoader
 		{
 			// queuePhoto(url, imageView);
 			queuePhoto(url, imageView, width);
-			imageView.setImageResource(stub_id);
+//			imageView.setImageResource(stub_id);
 		}
 
 	}
@@ -300,8 +300,8 @@ public class ImageLoader
 				return;
 			if (bitmap != null)
 				photoToLoad.imageView.setImageBitmap(bitmap);
-			else
-				photoToLoad.imageView.setImageResource(stub_id);
+//			else
+//				photoToLoad.imageView.setImageResource(stub_id);
 		}
 	}
 
@@ -342,8 +342,8 @@ public class ImageLoader
 
 			if (bitmap != null)
 				photoToLoad.imageView.setImageBitmap(bitmap);
-			else
-				photoToLoad.imageView.setImageResource(stub_id);
+//			else
+//				photoToLoad.imageView.setImageResource(stub_id);
 		}
 	}
 

@@ -7,12 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.jasonko.videolib.Video;
+import com.jasonko.videolib.VideoAPI;
+
 import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
 
-    ArrayList<YoutubeVideo> myVideos = new ArrayList<YoutubeVideo>();
+    ArrayList<Video> myVideos = new ArrayList<Video>();
     ListView myListView;
 
     @Override

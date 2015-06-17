@@ -23,10 +23,6 @@
             android:name=".VideoActivity"
             >
         </activity>
-        <activity
-            android:name=".VideoActivtiyTwo"
-            >
-        </activity>
 
     </application>
 

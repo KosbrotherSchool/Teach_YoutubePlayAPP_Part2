@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jasonko.imageloader.ImageLoader;
+import com.jasonko.videolib.ImageLoader;
+import com.jasonko.videolib.Video;
+
 
 /**
  * Created by kolichung on 5/1/15.

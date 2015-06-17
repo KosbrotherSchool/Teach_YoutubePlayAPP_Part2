@@ -12,7 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jasonko.imageloader.ImageLoader;
+import com.jasonko.videolib.ImageLoader;
+import com.jasonko.videolib.Video;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -23,11 +24,11 @@ import java.util.Locale;
 public class ListVideoAdapter extends BaseAdapter {
 
     private final Activity   mActivity;
-    private final ArrayList<YoutubeVideo> data;
+    private final ArrayList<Video> data;
     private static LayoutInflater inflater = null;
     public ImageLoader imageLoader;
 
-    public ListVideoAdapter(Activity context, ArrayList<YoutubeVideo> d) {
+    public ListVideoAdapter(Activity context, ArrayList<Video> d) {
         mActivity = context;
         data = d;
         inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

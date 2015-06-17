@@ -29,9 +29,10 @@ dependencies {
 }
 
 
-def siteUrl = 'https://github.com/zhengxiaopeng/BounceProgressBar'      // 项目的主页
-def gitUrl = 'https://github.com/zhengxiaopeng/BounceProgressBar.git'   // Git仓库的url
-group = "com.jasonko.videolib"                                        // Maven Group ID for the artifact，一般填你唯一的包名
+def siteUrl = 'https://github.com/KosbrotherSchool/Teach_YoutubePlayAPP_Part2'      // 项目的主页
+def gitUrl = 'https://github.com/KosbrotherSchool/Teach_YoutubePlayAPP_Part2.git'   // Git仓库的url
+group = "com.jasonko.videolib"
+                                 // Maven Group ID for the artifact，一般填你唯一的包名
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -39,7 +40,7 @@ install {
             project {
                 packaging 'aar'
                 // Add your description here
-                name 'Android BounceProgressBar Widget' 	//项目描述
+                name 'video lib for teaching' 	//项目描述
                 url siteUrl
                 // Set your license
                 licenses {
@@ -50,9 +51,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'zhengxiaopeng'		//填写的一些基本信息
-                        name 'Rocko'
-                        email 'zhengxiaopeng.china@gmail.com'
+                        id 'kerlichung'		//填写的一些基本信息
+                        name 'JasonKo'
+                        email 'kosbrotherschool@gmail.com'
                     }
                 }
                 scm {
@@ -62,5 +63,38 @@ install {
                 }
             }
         }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = "VideoLib"	//发布到JCenter上的项目名字
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
     }
 }
